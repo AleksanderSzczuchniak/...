@@ -1,0 +1,52 @@
+body{
+    font-family: Lato;
+}
+
+h1 {
+    border: 3px solid black;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+.frame {
+    border: 1px solid black;
+    border-radius: 5px;
+    min-height: 60px;
+    width: auto;
+    background: white;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    mso-border-shadow: yes;
+}
+
+.small-frame{
+    min-height: 75%;
+    width: 75%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-wrap: break-word;
+    margin: 2px;
+}
+
+#removeBtn{
+    height: 75%;
+    width: 90px;
+}
+
+#taski{
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+}
+
+#item{
+    width: 15%;
+    max-width: 200px;
+    border-radius: 2px;
+}
