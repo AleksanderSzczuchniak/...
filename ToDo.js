@@ -1,41 +1,64 @@
-function Task() {
+class ThingToDo {
 
+    constructor() {
+        this.exercises = []
+        this.render()
+    }
+    addExercise(text) {
+        this.exercises.push(new Exercise(text))
+        this.render()
+
+    }
+    render() {
+        document.body.innerHTML = ''
+
+        this.makePort()
+
+        const ul = document.createElement('ul')
+
+        this.exercises.forEach((exercise, index) => {
+            const li = document.createElement('li')
+            const buttonDelete = document.createElement('button')
+            buttonDelete.innerText = 'Delete exercise from the list'
+
+            buttonDelete.addEventListener('click',
+            () => this.deleteExercise(index))
+            li.innerText = exercise.text
+            li.appendChild(buttonDelete)
+            ul.appendChild(li)
+        })
+        document.body.appendChild(ul)
+
+    }
+    makePort() {
+        const input = document.createElement('input')
+        const buttonAdd = document.createElement('button')
+        buttonAdd.innerText = 'Add exercise to list'
+
+
+        buttonAdd.addEventListener(
+            'click',
+            () => this.addExercise(input.value)
+        )
+
+
+
+        document.body.appendChild(input)
+        document.body.appendChild(buttonAdd)
+
+    }
+
+    deleteExercise (index) {
+        this.exercises = this.exercises.slice(0, index).concat(this.exercises.slice(index + 1))
+        this.render()
+    }
+    
 }
 
-Task.prototype.init = function () {
 
-    var newDiv = document.createElement("div")
-    newDiv.setAttribute('class', 'frame')
-    var currentDiv = document.querySelector(".main");
-    document.body.appendChild(newDiv, currentDiv);
-
-    var newDiv2 = document.createElement("div")
-    var newContent2 = document.getElementById('item').value
-    var textNode = document.createTextNode(newContent2)
-    newDiv2.setAttribute('class', 'small-frame')
-    newDiv2.appendChild(textNode)
-    newDiv.appendChild(newDiv2);
-
-    var newDiv1 = document.createElement("input")
-    newDiv1.setAttribute('type', 'button')
-    newDiv1.setAttribute('id', 'removeBtn')
-    newDiv1.setAttribute('value', 'delete')
-    newDiv.appendChild(newDiv1);
-    newDiv1.addEventListener("click", function (el) {
-        newDiv.parentNode.removeChild(newDiv)
-    })
+class Exercise {
+    constructor(text) {
+        this.text = text
+    }
 }
-
-function newElement(cf) {
-    var newObj = {}
-    cf.call(newObj)
-    Object.setPrototypeOf(newObj, cf.prototype)
-    return newObj
-}
-
-function addToHTML() {
-    var newInput = newElement(Frame)
-    newInput.init()
-}
-
-document.getElementById("addbutton").addEventListener("click", addToHTML);
+const toDo1 = new ThingToDo()
